@@ -45,15 +45,15 @@
 		{
 			"type": "skirt",
 			"gender": "female",
-			"color": "pink",
+			"color": "yellow",
 			"size": "small",
-			"img": "../img/pink_s.png"
+			"img": "../img/yellow_s.png"
 		},
 		{
 			"type": "pants",
 			"gender": "female",
 			"color": "yellow",
-			"size": "mediul",
+			"size": "x-large",
 			"img": "../img/yellow_p.png"
 		},
 		{
@@ -73,9 +73,9 @@
 		{
 			"type": "pants",
 			"gender": "male",
-			"color": "pink",
+			"color": "blue",
 			"size": "medium",
-			"img": "../img/pink_p.png"
+			"img": "../img/blue_p.png"
 		}
 	]
 }

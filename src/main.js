@@ -1,50 +1,54 @@
 "use strict";
 
-function loadItem() {
-	const items = fetch("data/data.json")
+// Fetch the Json data.
+function loadItems() {
+	return fetch("../data/data.json")
 		.then(response => response.json())
-		.then(json => json.items)
-
-	return items
+		.then(data => data.items)
 }
 
-function displayItems(items) {
-	const container = document.querySelector(".items");
-
-	container.innerHTML = items.map((value) => {
-		return makeHTMLString(value)
-	}).join("")
-}
-
+// Make the HTML String with data
 function makeHTMLString(item) {
 	return `
 		<li class="item">
-			<img src=${item.img} alt=${item.type}>
-			<span>${item.gender}, ${item.size}</span>
+		<img src="${item.img}" alt="${item.type}" class="item__img">
+			<div class="item__description">
+				<span class="item__sex">${item.gender},</span>
+				<span class="item__size">${item.size}</span>
+			</div>
 		</li>
 	`
 }
 
-function onClickBtn(items) {
-	const btn = document.querySelector(".buttons");
-	const logo = document.querySelector(".logo");
+// Display the data on the screen
+function displayItems(items) {
+	const container = document.querySelector(".items")
 
-	logo.addEventListener("click", ()=> {
-		window.location.reload();
-	})
-	btn.addEventListener("click", (event) => {
-		const dataset = event.target.dataset
-		const type = dataset.type
-		const filteredItem = items.filter((value) => {
-			return value.type === type ||
-				value.color === type
-		})
-
-		displayItems(filteredItem)
+	container.innerHTML = items.map((item) => {
+		return makeHTMLString(item)
 	})
 }
 
-loadItem()
+// Filter the data with btns
+function onClickBtn(items) {
+	const buttons = document.querySelector(".buttons");
+	const homeBtn = document.querySelector(".home__logo");
+
+	buttons.addEventListener("click", (event) => {
+		const btnType = event.target.dataset.type;		
+		const filtered = items.filter((item) => {
+			return item.type === btnType || item.color === btnType;
+		})
+		displayItems(filtered)
+	})
+
+	homeBtn.addEventListener("click", () => {
+		displayItems(items)
+	})
+}
+
+// Main boombaya
+loadItems()
 	.then(items => {
 		displayItems(items)
 		onClickBtn(items)
